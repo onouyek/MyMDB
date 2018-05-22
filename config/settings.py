@@ -134,6 +134,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_REDIRECT_URL = 'core:MovieList'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
