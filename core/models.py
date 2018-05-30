@@ -170,5 +170,7 @@ class Vote(models.Model):
         auto_now=True
     )
 
+    objects = VoteManager()
+
     class Meta:
         unique_together = ('user', 'movie')
