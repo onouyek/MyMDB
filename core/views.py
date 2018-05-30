@@ -46,7 +46,7 @@ class CreateVote(LoginRequiredMixin, CreateView):
 class MovieDetail(DetailView):
     queryset = (
         Movie.objects
-            .all_with_related_persons())
+            .all_with_related_persons_and_score())
     
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
