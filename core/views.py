@@ -51,6 +51,7 @@ class MovieDetail(DetailView):
     
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx['image_form'] = self.movie_image_form()
         if self.request.user.is_authenticated:
             vote = Vote.objects.get_vote_or_unsaved_blank_vote(
                 movie=self.object,
