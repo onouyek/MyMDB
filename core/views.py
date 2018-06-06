@@ -9,7 +9,8 @@ from django.views.generic import (
     UpdateView
 )
 
-from core.forms import VoteForm
+from core.forms import (VoteForm,
+    MovieImageForm,)
 from core.models import (
     Movie,
     Person,
@@ -76,6 +77,11 @@ class MovieDetail(DetailView):
 
         return ctx
 
+    def movie_image_form(self):
+        if self.request.user.is_authenticated:
+            return MovieImageForm()
+        return None
+        
 
 class MovieList(ListView):
     model = Movie
