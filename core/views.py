@@ -8,7 +8,7 @@ from django.views.generic import (
     ListView, DetailView, CreateView,
     UpdateView
 )
-
+from core.mixins import CachePageVaryOnCookieMixin
 from core.forms import (VoteForm,
     MovieImageForm,)
 from core.models import (
@@ -112,11 +112,24 @@ class MovieImageUpload(LoginRequiredMixin, CreateView):
 class TopMovies(ListView):
     template_name = 'core/top_movies_list.html'
     queryset = Movie.objects.top_movies(limit=10)
-    
-            
-class MovieList(ListView):
+
+
+class MovieList(CachePageVaryOnCookieMixin, ListView):
     model = Movie
     paginate_by = 10
+
+    def get_context_data(self,
+                         **kwargs):
+        ctx = super(MovieList,
+                    self).get_context_data(
+            **kwargs)
+        page = ctx['page_obj']
+        paginator = ctx['paginator']
+        ctx['page_is_first'] = (
+            page.number == 1)
+        ctx['page_is_last'] = (
+            page.number == paginator.num_pages)
+        return ctx
 
 
 class PersonDetail(DetailView):
