@@ -27,3 +27,8 @@ CACHES = {
         'TIMEOUT': 5,
     }
 }
+
+# file uploads
+
+MEDIA_ROOT = os.path.join(
+    BASE_DIR, '../media_root')
