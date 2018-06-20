@@ -11,3 +11,11 @@ INSTALLED_APPS += [
 MIDDLEWARE += [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+DATABASES['default'].update({
+    'NAME': 'mymdb',
+    'USER': 'mymdb',
+    'PASSWORD': 'development',
+    'HOST': 'localhost',
+    'PORT': '5433',
+})
