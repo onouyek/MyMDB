@@ -32,3 +32,7 @@ CACHES = {
 
 MEDIA_ROOT = os.path.join(
     BASE_DIR, '../media_root')
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
