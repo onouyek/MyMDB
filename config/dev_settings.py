@@ -19,3 +19,11 @@ DATABASES['default'].update({
     'HOST': 'localhost',
     'PORT': '5433',
 })
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-locmemcache',
+        'TIMEOUT': 5,
+    }
+}
