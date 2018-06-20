@@ -22,3 +22,10 @@ RUN /mymdb/scripts/pip_install.sh /mymdb
 
 # collect the static files
 RUN /mymdb/scripts/collect_static.sh /mymdb
+
+# configure nginx
+COPY nginx/mymdb.conf /etc/nginx/sites-available/mymdb.conf
+RUN rm /etc/nginx/sites-enabled/*
+RUN ln -s /etc/nginx/sites-available/mymdb.conf /etc/nginx/sites-enabled/mymdb.conf
+
+COPY runit/nginx /etc/service/nginx
