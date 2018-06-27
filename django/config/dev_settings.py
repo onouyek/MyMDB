@@ -17,7 +17,7 @@ DATABASES['default'].update({
     'USER': 'mymdb',
     'PASSWORD': 'development',
     'HOST': 'localhost',
-    'PORT': '5433',
+    'PORT': '5432',
 })
 
 CACHES = {

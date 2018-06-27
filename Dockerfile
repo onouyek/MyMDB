@@ -19,6 +19,7 @@ RUN apt-get install -y \
 RUN pip3 install virtualenv
 RUN virtualenv /mymdb/venv
 RUN /mymdb/scripts/pip_install.sh /mymdb
+RUN chmod +x /mymdb/pip_install.sh
 
 # collect the static files
 RUN /mymdb/scripts/collect_static.sh /mymdb
