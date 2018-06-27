@@ -18,10 +18,11 @@ RUN apt-get install -y \
     python3-pip
 RUN pip3 install virtualenv
 RUN virtualenv /mymdb/venv
+RUN chmod +x /mymdb/scripts/pip_install.sh
 RUN /mymdb/scripts/pip_install.sh /mymdb
-RUN chmod +x /mymdb/pip_install.sh
 
 # collect the static files
+RUN chmod +x /mymdb/scripts/collect_static.sh
 RUN /mymdb/scripts/collect_static.sh /mymdb
 
 # configure nginx
@@ -30,7 +31,7 @@ RUN rm /etc/nginx/sites-enabled/*
 RUN ln -s /etc/nginx/sites-available/mymdb.conf /etc/nginx/sites-enabled/mymdb.conf
 
 COPY runit/nginx /etc/service/nginx
-
+RUN chmod +x /etc/service/nginx/run
 # configure uwsgi
 COPY uwsgi/mymdb.ini /etc/uwsgi/apps-enabled/mymdb.ini
 RUN mkdir -p /var/log/uwsgi/
@@ -39,7 +40,7 @@ RUN chown www-data /var/log/uwsgi/mymdb.log
 RUN chown www-data /var/log/mymdb/mymdb.log
 
 COPY runit/uwsgi /etc/service/uwsgi
-RUN chmod +x /etc/service/uwsgi
+RUN chmod +x /etc/service/uwsgi/run
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
