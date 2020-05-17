@@ -13,6 +13,7 @@ RUN touch /var/log/mymdb/mymdb.log
 RUN apt-get -y update
 RUN apt-get install -y \
     nginx \
+    libpq-dev \
     postgresql-client \
     python3 \
     python3-pip
